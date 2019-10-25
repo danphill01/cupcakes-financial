@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cupcakes Financial</title>
+  <link rel="stylesheet" href="css/master.css">
+  <script src="moment.min.js"></script>
+  <script src="accounting.min.js"></script>
+  <script src="handleFiles.js"></script>
+</head>
+
+<body>
+  <div>
+    <p>below is the input to select the file</p>
+    <input type="file" id="input" multiple onchange="handleFiles(this.files)" />
+  </div>
+  <div class="container">
+    <div id="weekly" class="container">
+      <div class="timePeriod">Year-Week</div>
+      <div class="basic">Basic</div>
+      <div class="delux">Delux</div>
+      <div class="total">Total</div>
+    </div>
+    <div id="monthly" class="container">
+      <div class="timePeriod">Year-Month</div>
+      <div class="basic">Basic</div>
+      <div class="delux">Delux</div>
+      <div class="total">Total</div>
+    </div>
+    <div id="yearly" class="container">
+      <div class="timePeriod">Year</div>
+      <div class="basic">Basic</div>
+      <div class="delux">Delux</div>
+      <div class="total">Total</div>
+    </div>
+  </div>
+</body>
+
+</html>

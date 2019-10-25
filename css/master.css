@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.container .container {
+  border: 1px solid black;
+}
+
+.timePeriod, .basic, .delux, .total {
+  margin: 10px;
+}
