@@ -1,6 +1,4 @@
 
-
-
 const handleFiles = (input) => {
   const setupReader = (file) => {
     let weeklyRevenueTotal = {};
@@ -51,7 +49,7 @@ const handleFiles = (input) => {
           yearlyRevenueTotal[yearDateString] = dailyRevenue;
         }
       });
-      console.log(file.name, JSON.stringify(weeklyRevenueTotal), JSON.stringify(monthlyRevenueTotal), JSON.stringify(yearlyRevenueTotal));
+      // console.log(file.name, JSON.stringify(weeklyRevenueTotal), JSON.stringify(monthlyRevenueTotal), JSON.stringify(yearlyRevenueTotal));
       switch (file.name) {
         case "Basic.txt":
           basicWeeklyRevenueTotal = { ...weeklyRevenueTotal };
@@ -114,7 +112,7 @@ const handleFiles = (input) => {
             attachTimePeriodElement('timePeriod', 'yearly', year);
             attachRevenueElement('basic', 'yearly', basicYearlyRevenueTotal[year]);
           });
-        }, 1000)
+        }, 500)
         break;
       case "Delux.txt":
         setupReader(input[i]);
@@ -128,7 +126,7 @@ const handleFiles = (input) => {
           Object.keys(deluxYearlyRevenueTotal).reverse().forEach(year => {
             attachRevenueElement('delux', 'yearly', deluxYearlyRevenueTotal[year]);
           });
-        }, 1000)
+        }, 500)
         break;
       case "Total.txt":
         setupReader(input[i]);
@@ -142,10 +140,37 @@ const handleFiles = (input) => {
           Object.keys(totalYearlyRevenueTotal).reverse().forEach(year => {
             attachRevenueElement('total', 'yearly', totalYearlyRevenueTotal[year]);
           });
-        }, 1000)
+        }, 500)
         break;
     };
   }
+  setTimeout(() => {
+    genBarChart(
+      'weeklyChart',
+      'Revenue by Week',
+      Object.keys(totalWeeklyRevenueTotal),
+      Object.values(basicWeeklyRevenueTotal),
+      Object.values(deluxWeeklyRevenueTotal),
+      Object.values(totalWeeklyRevenueTotal),
+    );
+    genBarChart(
+      'monthlyChart',
+      'Revenue by Month',
+      Object.keys(totalMonthlyRevenueTotal),
+      Object.values(basicMonthlyRevenueTotal),
+      Object.values(deluxMonthlyRevenueTotal),
+      Object.values(totalMonthlyRevenueTotal),
+    );
+    genBarChart(
+      'yearlyChart',
+      'Revenue by Year',
+      Object.keys(totalYearlyRevenueTotal),
+      Object.values(basicYearlyRevenueTotal),
+      Object.values(deluxYearlyRevenueTotal),
+      Object.values(totalYearlyRevenueTotal),
+    );
+  }, 1000)
+
 
   const attachTimePeriodElement = (type, timeUnit, timePeriod) => {
     let node = document.createElement('P')
@@ -161,6 +186,50 @@ const handleFiles = (input) => {
     document.getElementById(timeUnit).getElementsByClassName(type)[0].appendChild(node);
   }
 
+  // basic and delux chart
+  const genBarChart = (chartName, chartTitle, keys, basicValues, deluxValues, totalValues) => {
+    var ctx = document.getElementById(chartName).getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: keys,
+            datasets: [{
+                label: 'Basic',
+                data: basicValues,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Delux',
+                data: deluxValues,
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            },{
+                label: 'Total',
+                data: totalValues,
+                borderColor: 'rgba(0, 0, 0, 1)',
+                borderWidth: 1,
+                type: 'line',
+                fill: false,
+            }]
+        },
+        options: {
+            title: {
+              display: true,
+              text: chartTitle
+            },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                },
+              }]
+            }
+        }
+    });
+  }
 
 }
     // console.log(`

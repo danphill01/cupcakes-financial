@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <title>Cupcakes Financial</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
   <link rel="stylesheet" href="css/master.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
   <script src="moment.min.js"></script>
   <script src="accounting.min.js"></script>
   <script src="handleFiles.js"></script>
@@ -16,23 +18,32 @@
     <input type="file" id="input" multiple onchange="handleFiles(this.files)" />
   </div>
   <div class="container">
-    <div id="weekly" class="container">
-      <div class="timePeriod">Year-Week</div>
-      <div class="basic">Basic</div>
-      <div class="delux">Delux</div>
-      <div class="total">Total</div>
+    <div>
+      <canvas id="weeklyChart" width="200" height="200"></canvas>
+      <div id="weekly" class="container">
+        <div class="timePeriod">Year-Week</div>
+        <div class="basic">Basic</div>
+        <div class="delux">Delux</div>
+        <div class="total">Total</div>
+      </div>
     </div>
-    <div id="monthly" class="container">
-      <div class="timePeriod">Year-Month</div>
-      <div class="basic">Basic</div>
-      <div class="delux">Delux</div>
-      <div class="total">Total</div>
+    <div>
+      <canvas id="monthlyChart" width="200" height="200"></canvas>
+      <div id="monthly" class="container">
+        <div class="timePeriod">Year-Month</div>
+        <div class="basic">Basic</div>
+        <div class="delux">Delux</div>
+        <div class="total">Total</div>
+      </div>
     </div>
-    <div id="yearly" class="container">
-      <div class="timePeriod">Year</div>
-      <div class="basic">Basic</div>
-      <div class="delux">Delux</div>
-      <div class="total">Total</div>
+    <div>
+      <canvas id="yearlyChart" width="200" height="200"></canvas>
+      <div id="yearly" class="container">
+        <div class="timePeriod">Year</div>
+        <div class="basic">Basic</div>
+        <div class="delux">Delux</div>
+        <div class="total">Total</div>
+      </div>
     </div>
   </div>
 </body>
